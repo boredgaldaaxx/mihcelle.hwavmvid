@@ -4,6 +4,15 @@ using Mihcelle.Hwavmvid.Components;
 using Mihcelle.Hwavmvid.Shared.Constants;
 using Mihcelle.Hwavmvid.Shared.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Components.Authorization;
+using Mihcelle.Hwavmvid;
+using Mihcelle.Hwavmvid.Alerts;
+using Mihcelle.Hwavmvid.Client;
+using Mihcelle.Hwavmvid.Cookies;
+using Mihcelle.Hwavmvid.Fileupload;
+using Mihcelle.Hwavmvid.Modal;
+using Mihcelle.Hwavmvid.Notifications;
+using Mihcelle.Hwavmvid.Pager;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +20,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+
+// mihcelle.hwavmvid
+builder.Services.AddHttpClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated",
+    client => { client.BaseAddress = new Uri(builder.Environment.ContentRootPath + "api"); });
+
+
+
+
+
+
+builder.Services.AddScoped<Cookiesprovider, Cookiesprovider>();
+
 
 
 

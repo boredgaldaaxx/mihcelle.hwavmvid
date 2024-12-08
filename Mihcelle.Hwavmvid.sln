@@ -11,6 +11,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Shared", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Pager", "Mihcelle.Hwavmvid.Pager\Mihcelle.Hwavmvid.Pager.csproj", "{9849B786-3FFF-4691-A0FA-25F19B8178D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Modal", "Mihcelle.Hwavmvid.Modal\Mihcelle.Hwavmvid.Modal.csproj", "{8DE9517A-9858-459B-9FEE-74B2BBCC5A69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Fileupload", "Mihcelle.Hwavmvid.Fileupload\Mihcelle.Hwavmvid.Fileupload.csproj", "{C1075D0C-4B88-4179-9ED2-7F144088C75D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Cookies", "Mihcelle.Hwavmvid.Cookies\Mihcelle.Hwavmvid.Cookies.csproj", "{55B846AF-EB5E-4714-B695-6345A0BAD54C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hwavmvid.Alerts", "Hwavmvid.Alerts\Hwavmvid.Alerts.csproj", "{476FA57E-854B-47D7-B84C-850513860A37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hwavmvid.Notifications", "Hwavmvid.Notifications\Hwavmvid.Notifications.csproj", "{4D81B1D0-E966-4995-837F-C54091AC070F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +43,26 @@ Global
 		{9849B786-3FFF-4691-A0FA-25F19B8178D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9849B786-3FFF-4691-A0FA-25F19B8178D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9849B786-3FFF-4691-A0FA-25F19B8178D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DE9517A-9858-459B-9FEE-74B2BBCC5A69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DE9517A-9858-459B-9FEE-74B2BBCC5A69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DE9517A-9858-459B-9FEE-74B2BBCC5A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DE9517A-9858-459B-9FEE-74B2BBCC5A69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1075D0C-4B88-4179-9ED2-7F144088C75D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1075D0C-4B88-4179-9ED2-7F144088C75D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1075D0C-4B88-4179-9ED2-7F144088C75D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1075D0C-4B88-4179-9ED2-7F144088C75D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55B846AF-EB5E-4714-B695-6345A0BAD54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55B846AF-EB5E-4714-B695-6345A0BAD54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55B846AF-EB5E-4714-B695-6345A0BAD54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55B846AF-EB5E-4714-B695-6345A0BAD54C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{476FA57E-854B-47D7-B84C-850513860A37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{476FA57E-854B-47D7-B84C-850513860A37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{476FA57E-854B-47D7-B84C-850513860A37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{476FA57E-854B-47D7-B84C-850513860A37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D81B1D0-E966-4995-837F-C54091AC070F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D81B1D0-E966-4995-837F-C54091AC070F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D81B1D0-E966-4995-837F-C54091AC070F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D81B1D0-E966-4995-837F-C54091AC070F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
