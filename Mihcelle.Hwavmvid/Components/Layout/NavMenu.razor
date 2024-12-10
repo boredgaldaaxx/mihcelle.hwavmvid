@@ -2,72 +2,146 @@
 
 @inject NavigationManager NavigationManager
 
-<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Mihcelle.Hwavmvid</a>
-    </div>
-</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+        <a class="navbar-brand" href="#">
+            <img src="" height="72" style="background-color: slateblue;" />
+        </a>
 
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link disabled lead" href="#" style="font-size: 1.4rem;">framework description</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardropdownblank" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Links
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbardropdownblank" style="left: auto !important; right: 0;">
+                           
+                        @*
+                        @foreach (var item in this._contextpages)
+                        {
+                            <li class="dropdown-item">
+                                <a href=""</a>
+                            </li>
+                        }
+                        *@
+
+                        <li class="dropdown-item">
+                            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <AuthorizeView>
+                    <Authorized>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                Packages
+                            </a>
+                            <ul class="dropdown-menu" style="left: auto !important; right: 0;">
+                                <li>
+                                    <div class="p-2 p-sm-4" style="min-width: 410px;">
+                                                
+                                        module package dropdown
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </Authorized>
+                </AuthorizeView>
+
+                <AuthorizeView>
+                    <Authorized>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu" style="left: auto !important; right: 0;">
+                                <li>
+                                    <div class="p-2 p-sm-4" style="min-width: 850px;">
+
+                                        Admin Dashboard
+                                        
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </Authorized>
+                </AuthorizeView>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    
+                        <AuthorizeView>
+                            <Authorized>
+                                <span>☑ current username</span>
+                            </Authorized>
+                        </AuthorizeView>                        
+                        
+
+                        <AuthorizeView>
+                            <NotAuthorized>
+
+                                <span>Account / Login</span>
+
+                            </NotAuthorized>
+                        </AuthorizeView>
+                        
+
+                    </a>
+                    <ul class="dropdown-menu" style="left: auto !important; right: 0;">
+                        <li>
+                            <div class="p-2 p-sm-4" style="min-width: 410px;">
+
+                                <AuthorizeView>
+                                    <Authorized>
+                                        <form action="Account/Logout" method="post">
+                                            <AntiforgeryToken />
+                                            <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                                            <button type="submit" class="nav-link">
+                                                <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Logout
+                                            </button>
+                                        </form>
+                                    </Authorized>
+                                </AuthorizeView>
+
+                                <AuthorizeView>
+                                    <NotAuthorized>
+
+                                        <!-- currenturl updates -->
+                                        <div class="nav-item px-3">
+                                            <NavLink class="nav-link" href="Account/Register">
+                                                <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Register
+                                            </NavLink>
+                                        </div>
+                                        <div class="nav-item px-3">
+                                            <NavLink class="nav-link" href="Account/Login">
+                                                <span class="bi bi-person-badge-nav-menu" aria-hidden="true"></span> Login
+                                            </NavLink>
+                                        </div>
+
+                                    </NotAuthorized>
+                                </AuthorizeView>
+
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="auth">
-                <span class="bi bi-lock-nav-menu" aria-hidden="true"></span> Auth Required
-            </NavLink>
-        </div>
-
-        <AuthorizeView>
-            <Authorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Manage">
-                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @context.User.Identity?.Name
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <form action="Account/Logout" method="post">
-                        <AntiforgeryToken />
-                        <input type="hidden" name="ReturnUrl" value="@currentUrl" />
-                        <button type="submit" class="nav-link">
-                            <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Logout
-                        </button>
-                    </form>
-                </div>
-            </Authorized>
-            <NotAuthorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Register">
-                        <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Register
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Login">
-                        <span class="bi bi-person-badge-nav-menu" aria-hidden="true"></span> Login
-                    </NavLink>
-                </div>
-            </NotAuthorized>
-        </AuthorizeView>
-    </nav>
-</div>
+</nav>
 
 @code {
     private string? currentUrl;
