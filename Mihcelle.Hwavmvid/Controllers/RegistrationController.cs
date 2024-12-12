@@ -10,7 +10,7 @@ namespace Mihcelle.Hwavmvid.Controllers
 {
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class Registrationcontroller : ControllerBase
     {
         public UserManager<ApplicationUser> usermanager { get; set; }

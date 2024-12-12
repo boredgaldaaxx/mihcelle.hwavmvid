@@ -13,7 +13,7 @@ using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 namespace Mihcelle.Hwavmvid.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class Logincontroller : ControllerBase
     {
 
@@ -30,17 +30,24 @@ namespace Mihcelle.Hwavmvid.Controllers
         [HttpGet("{username}/{password}")]
         public async Task Get(string username, string password)
         {
-            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
+
+            try
             {
-                var identityuser = await usermanager.FindByNameAsync(username);
-                if (identityuser != null)
+                if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
                 {
-                    var result = await signinmanager.PasswordSignInAsync(identityuser, password, true, false);
-                    if (!result.Succeeded)
+                    var identityuser = await usermanager.FindByNameAsync(username);
+                    if (identityuser != null)
                     {
-                        throw new HubException("user sign in failed..");
+                        var result = await signinmanager.PasswordSignInAsync(identityuser, password, true, false);
+                        if (!result.Succeeded)
+                        {
+                            throw new HubException("user sign in failed..");
+                        }
                     }
                 }
+            } catch (Exception exceptiion)
+            {
+
             }
         }
     }

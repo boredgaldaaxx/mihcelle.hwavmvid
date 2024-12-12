@@ -10,7 +10,7 @@ using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 namespace Mihcelle.Hwavmvid.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class Logoutcontroller : ControllerBase
     {
 
