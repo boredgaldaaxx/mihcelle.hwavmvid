@@ -1,10 +1,14 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Mihcelle.Hwavmvid.Data
 {
-    // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-    }
 
+        [Key] [DatabaseGenerated(DatabaseGeneratedOption.Identity)] [StringLength(410)]
+        public override string Id { get; set; }
+
+    }
 }
