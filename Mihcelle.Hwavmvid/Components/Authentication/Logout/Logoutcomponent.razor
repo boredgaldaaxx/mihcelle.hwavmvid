@@ -1,0 +1,37 @@
+﻿@namespace Mihcelle.Hwavmvid.Authentication
+@inherits Authenticationbase
+
+@inject NavigationManager navigationmanager
+@inject IHttpClientFactory ihttpclientfactory
+
+
+<AuthorizeView>
+    <Authorized>   
+
+        <div class="logout">
+
+            <button type="button" @onclick="async () => await this.Logoutuser()" class="btn btn-sm btn-link">Logout @context.User.Identity.Name</button>
+
+        </div>
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    protected async Task Logoutuser()
+    {
+
+        try
+        {
+            var client = this.ihttpclientfactory.CreateClient();
+            client.BaseAddress = new Uri(this.navigationmanager.BaseUri);
+            await client.GetAsync("api/logout");
+            this.navigationmanager.NavigateTo(navigationmanager.Uri, true);
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception.Message);
+        }
+    }
+}

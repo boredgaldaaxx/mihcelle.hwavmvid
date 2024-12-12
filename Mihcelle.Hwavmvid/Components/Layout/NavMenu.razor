@@ -88,7 +88,6 @@
                                 <span>☑ @context.User.Identity.Name</span>
                             </Authorized>
                         </AuthorizeView>                        
-                        
 
                         <AuthorizeView>
                             <NotAuthorized>
@@ -108,14 +107,10 @@
                                     <NotAuthorized>
 
                                         <div>
-                                            <NavLink class="dropdown-item" href="Account/Register">
-                                                <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Register
-                                            </NavLink>
+                                            <Mihcelle.Hwavmvid.Authentication.Registrationcomponent></Mihcelle.Hwavmvid.Authentication.Registrationcomponent>
                                         </div>
                                         <div>
-                                            <NavLink class="dropdown-item" href="Account/Login">
-                                                <span class="bi bi-person-badge-nav-menu" aria-hidden="true"></span> Login
-                                            </NavLink>
+                                            <Mihcelle.Hwavmvid.Authentication.Logincomponent></Mihcelle.Hwavmvid.Authentication.Logincomponent>
                                         </div>
 
                                     </NotAuthorized>
@@ -124,11 +119,9 @@
                                 <AuthorizeView>
                                     <Authorized>
                                         <form action="Account/Logout" method="post">
-                                            <AntiforgeryToken />
-                                            <input type="hidden" name="ReturnUrl" value="@currentUrl" />
-                                            <button type="submit" class="nav-link">
-                                                <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Logout
-                                            </button>
+                                            
+                                            <Mihcelle.Hwavmvid.Authentication.Logoutcomponent></Mihcelle.Hwavmvid.Authentication.Logoutcomponent>
+
                                         </form>
                                     </Authorized>
                                 </AuthorizeView>

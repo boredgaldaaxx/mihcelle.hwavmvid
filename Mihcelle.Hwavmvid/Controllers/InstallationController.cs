@@ -15,7 +15,7 @@ using Mihcelle.Hwavmvid.Data;
 using Microsoft.EntityFrameworkCore;
 using Mihcelle.Hwavmvid.Shared.Constants;
 
-namespace Mihcelle.Hwavmvid.Server.Controllers
+namespace Mihcelle.Hwavmvid.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -87,24 +87,24 @@ namespace Mihcelle.Hwavmvid.Server.Controllers
             if (createuserresult.Succeeded)
             {
 
-                if (!await this.rolemanager.RoleExistsAsync(Authentication.Hostrole))
+                if (!await this.rolemanager.RoleExistsAsync(Shared.Constants.Authentication.Hostrole))
                 {
-                    await this.rolemanager.CreateAsync(new IdentityRole(Authentication.Hostrole));
+                    await this.rolemanager.CreateAsync(new IdentityRole(Shared.Constants.Authentication.Hostrole));
                 }
-                if (!await this.rolemanager.RoleExistsAsync(Authentication.Administratorrole))
+                if (!await this.rolemanager.RoleExistsAsync(Shared.Constants.Authentication.Administratorrole))
                 {
-                    await this.rolemanager.CreateAsync(new IdentityRole(Authentication.Administratorrole));
+                    await this.rolemanager.CreateAsync(new IdentityRole(Shared.Constants.Authentication.Administratorrole));
                 }
-                if (!await this.rolemanager.RoleExistsAsync(Authentication.Userrole))
+                if (!await this.rolemanager.RoleExistsAsync(Shared.Constants.Authentication.Userrole))
                 {
-                    await this.rolemanager.CreateAsync(new IdentityRole(Authentication.Userrole));
+                    await this.rolemanager.CreateAsync(new IdentityRole(Shared.Constants.Authentication.Userrole));
                 }
-                if (!await this.rolemanager.RoleExistsAsync(Authentication.Anonymousrole))
+                if (!await this.rolemanager.RoleExistsAsync(Shared.Constants.Authentication.Anonymousrole))
                 {
-                    await this.rolemanager.CreateAsync(new IdentityRole(Authentication.Anonymousrole));
+                    await this.rolemanager.CreateAsync(new IdentityRole(Shared.Constants.Authentication.Anonymousrole));
                 }
 
-                var addtoroleresult = await usermanager.AddToRoleAsync(applicationuser, Authentication.Hostrole);
+                var addtoroleresult = await usermanager.AddToRoleAsync(applicationuser, Shared.Constants.Authentication.Hostrole);
                 if (!addtoroleresult.Succeeded)
                 {
                     throw new HubException("Failed to add user to role..");
