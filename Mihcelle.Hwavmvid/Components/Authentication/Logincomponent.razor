@@ -2,15 +2,17 @@
 
 @using Mihcelle.Hwavmvid.Data
 @using Mihcelle.Hwavmvid.Shared.Models
+@using Microsoft.AspNetCore.Identity
 
 @inject NavigationManager navigationmanager
 @inject IHttpClientFactory ihttpclientfactory
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <div class="login">
 
     <div class="input-group mb-3">
-      <span class="input-group-text" id="login-username">@@</span>
-      <input type="text" @bind-value="Applicationuser.UserName" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="login-username">
+        <span class="input-group-text" id="login-username">@@</span>
+        <input type="text" @bind-value="Applicationuser.UserName" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="login-username">
     </div>
 
     <div class="input-group mb-3">
@@ -22,17 +24,17 @@
 
 </div>
 
+
 @code {
 
     protected ApplicationUser Applicationuser { get; set; } = new ApplicationUser();
+    protected AuthenticationState authenticationState { get; set; }
 
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         this.Applicationuser.EmailConfirmed = true;
         this.Applicationuser.TwoFactorEnabled = false;
         this.Applicationuser.LockoutEnabled = true;
-
-        return base.OnInitializedAsync();
     }
 
     protected async Task Loginuser()

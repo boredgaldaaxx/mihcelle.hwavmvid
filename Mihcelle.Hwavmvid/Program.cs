@@ -6,6 +6,7 @@ using Mihcelle.Hwavmvid.Components;
 using Mihcelle.Hwavmvid.Data;
 using Mihcelle.Hwavmvid.Shared.Constants;
 using Mihcelle.Hwavmvid.Shared.Models;
+using Mihcelle.Hwavmvid;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddAuthorizationCore();
 builder.Services.AddCascadingAuthenticationState();
 
 try
@@ -77,6 +77,8 @@ builder.Services.AddCors(option =>
     });
 });
 
+// mihcelle.hwavmvid
+builder.Services.AddScoped<AuthenticationStateProvider, Applicationauthenticationstateprovider>();
 
 var app = builder.Build();
 
