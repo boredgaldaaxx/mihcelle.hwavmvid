@@ -7,6 +7,7 @@ using Mihcelle.Hwavmvid.Data;
 using Mihcelle.Hwavmvid.Shared.Constants;
 using Mihcelle.Hwavmvid.Shared.Models;
 using Mihcelle.Hwavmvid;
+using Mihcelle.Hwavmvid.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -79,6 +80,7 @@ builder.Services.AddCors(option =>
 
 // mihcelle.hwavmvid
 builder.Services.AddScoped<AuthenticationStateProvider, Applicationauthenticationstateprovider>();
+builder.Services.AddScoped<Cookiesprovider, Cookiesprovider>();
 
 var app = builder.Build();
 
@@ -100,6 +102,8 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors("mihcellehwavmvidcorspolicy");
 
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseAntiforgery();
 

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid", "Mihcel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Shared", "Mihelle.Hwavmvid.Shared\Mihcelle.Hwavmvid.Shared.csproj", "{9D0037FB-141E-44C6-B497-E5AB1A7FC711}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Cookies", "Mihcelle.Hwavmvid.Cookies\Mihcelle.Hwavmvid.Cookies.csproj", "{6564B8CE-56BB-4238-8392-BC2E667A6B89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9D0037FB-141E-44C6-B497-E5AB1A7FC711}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D0037FB-141E-44C6-B497-E5AB1A7FC711}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D0037FB-141E-44C6-B497-E5AB1A7FC711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6564B8CE-56BB-4238-8392-BC2E667A6B89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6564B8CE-56BB-4238-8392-BC2E667A6B89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6564B8CE-56BB-4238-8392-BC2E667A6B89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6564B8CE-56BB-4238-8392-BC2E667A6B89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
