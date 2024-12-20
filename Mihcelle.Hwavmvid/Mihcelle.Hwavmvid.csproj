@@ -18,7 +18,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hwavmvid.Alerts\Hwavmvid.Alerts.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Notifications\Hwavmvid.Notifications.csproj" />
     <ProjectReference Include="..\Mihcelle.Hwavmvid.Cookies\Mihcelle.Hwavmvid.Cookies.csproj" />
+    <ProjectReference Include="..\Mihcelle.Hwavmvid.Fileupload\Mihcelle.Hwavmvid.Fileupload.csproj" />
+    <ProjectReference Include="..\Mihcelle.Hwavmvid.Modal\Mihcelle.Hwavmvid.Modal.csproj" />
+    <ProjectReference Include="..\Mihcelle.Hwavmvid.Pager\Mihcelle.Hwavmvid.Pager.csproj" />
     <ProjectReference Include="..\Mihelle.Hwavmvid.Shared\Mihcelle.Hwavmvid.Shared.csproj" />
   </ItemGroup>
 

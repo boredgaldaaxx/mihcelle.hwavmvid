@@ -5,6 +5,7 @@
 @inject IHttpClientFactory ihttpclientfactory
 @inject NavigationManager navigationmanager
 @inject Cookies.Cookiesprovider cookiesprovider
+@inject Modal.Modalservice modalservice
 
 <PageTitle>Home</PageTitle>
 
@@ -29,7 +30,7 @@ Welcome to your new app. Installation link here.
         if (firstRender)
         {
 
-
+            await this.modalservice.Initmodal();
             await this.cookiesprovider.Initcookiesprovider();
 
             var client = this.ihttpclientfactory.CreateClient();

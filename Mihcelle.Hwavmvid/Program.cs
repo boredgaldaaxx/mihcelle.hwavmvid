@@ -10,6 +10,11 @@ using Mihcelle.Hwavmvid;
 using Mihcelle.Hwavmvid.Cookies;
 using Microsoft.AspNetCore.Http.Connections;
 using Mihcelle.Hwavmvid.Alerts;
+using Mihcelle.Hwavmvid.Modal;
+using Mihcelle.Hwavmvid.Notifications;
+using Mihcelle.Hwavmvid.Fileupload;
+using Mihcelle.Hwavmvid.Modules;
+using Mihcelle.Hwavmvid.Pager;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,11 +24,16 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddCascadingAuthenticationState();
 
+string connectionString = string.Empty;
+bool installed = false;
+
 try
 {
 
     // mihcelle.hwavmvid
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    installed = !string.IsNullOrEmpty(connectionString);
+
     builder.Services.AddDbContext<Applicationdbcontext>(options => options.UseSqlServer(connectionString));
     builder.Services.AddIdentity<Applicationuser, IdentityRole>(options =>
     {
@@ -83,8 +93,16 @@ builder.Services.AddCors(option =>
 // mihcelle.hwavmvid
 builder.Services.AddScoped<AuthenticationStateProvider, Applicationauthenticationstateprovider>();
 builder.Services.AddScoped<Applicationprovider, Applicationprovider>();
+builder.Services.AddScoped<Applicationmodulesettingsservice, Applicationmodulesettingsservice>();
 builder.Services.AddScoped<AlertsService, AlertsService>();
 builder.Services.AddScoped<Cookiesprovider, Cookiesprovider>();
+builder.Services.AddScoped<Modalservice, Modalservice>();
+builder.Services.AddScoped<NotificationsService, NotificationsService>();
+builder.Services.AddScoped<Fileuploadservice, Fileuploadservice>();
+builder.Services.AddScoped<Pagerservice<Applicationpage>, Pagerservice<Applicationpage>>();
+builder.Services.AddScoped<Pagerservice<Applicationtask>, Pagerservice<Applicationtask>>();
+builder.Services.AddScoped<Pagerservice<Applicationmediafile>, Pagerservice<Applicationmediafile>>();
+
 
 // mihcelle.hwavmvid
 builder.Services.AddSignalR()
@@ -107,6 +125,26 @@ builder.Services.AddSignalR()
         options.PayloadSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
         options.PayloadSerializerOptions.PropertyNamingPolicy = null;
     });
+
+// mihcelle.hwavmvid
+if (installed == true)
+{
+    try
+    {
+        var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterface)).IsAssignableFrom(assemblytypes));
+
+        programitems = programitems.Where(item => item.IsClass);
+        programitems = programitems.OrderBy(item => !string.IsNullOrEmpty(item.FullName) && item.FullName.StartsWith("Mihcelle.Hwavmvid.Programstartup")).ToList();
+
+        foreach (var item in programitems)
+        {
+            Programinterface? programinterfaceinstance = (Programinterface?)Activator.CreateInstance(item);
+            if (programinterfaceinstance != null)
+                programinterfaceinstance.Configure(builder.Services);
+        }
+    }
+    catch (Exception exception) { Console.WriteLine(exception.Message); }
+}
 
 var app = builder.Build();
 
@@ -150,5 +188,21 @@ app.MapRazorComponents<App>()
 
 // mihcelle.hwavmvid
 app.MapControllers();
+
+// mihcelle.hwavmvid
+try
+{
+    var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterface)).IsAssignableFrom(assemblytypes));
+    programitems = programitems.Where(item => item.IsClass);
+    programitems = programitems.OrderBy(item => !string.IsNullOrEmpty(item.FullName) && item.FullName.StartsWith("Mihcelle.Hwavmvid.Programstartup")).ToList();
+
+    foreach (var item in programitems)
+    {
+        Programinterface? programinterfaceinstance = (Programinterface?)Activator.CreateInstance(item);
+        if (programinterfaceinstance != null)
+            programinterfaceinstance.Configureapp(app);
+    }
+}
+catch (Exception exception) { Console.WriteLine(exception.Message); }
 
 app.Run();

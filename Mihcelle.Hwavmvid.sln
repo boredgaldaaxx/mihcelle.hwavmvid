@@ -11,6 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Cookies",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hwavmvid.Alerts", "Hwavmvid.Alerts\Hwavmvid.Alerts.csproj", "{05604164-9509-4214-BB01-B47D2B926904}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Modal", "Mihcelle.Hwavmvid.Modal\Mihcelle.Hwavmvid.Modal.csproj", "{3E314A46-3EA2-4A19-811C-9DBF4AF4B70E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hwavmvid.Notifications", "Hwavmvid.Notifications\Hwavmvid.Notifications.csproj", "{42B08185-A734-40BB-B24D-8E005EC87C79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Fileupload", "Mihcelle.Hwavmvid.Fileupload\Mihcelle.Hwavmvid.Fileupload.csproj", "{68DCC3BF-4375-477D-996F-8EF55ACEDDC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mihcelle.Hwavmvid.Pager", "Mihcelle.Hwavmvid.Pager\Mihcelle.Hwavmvid.Pager.csproj", "{6872B5B3-CFF2-4FC5-9596-DB10C4E9FB96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +41,22 @@ Global
 		{05604164-9509-4214-BB01-B47D2B926904}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05604164-9509-4214-BB01-B47D2B926904}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05604164-9509-4214-BB01-B47D2B926904}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E314A46-3EA2-4A19-811C-9DBF4AF4B70E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E314A46-3EA2-4A19-811C-9DBF4AF4B70E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E314A46-3EA2-4A19-811C-9DBF4AF4B70E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E314A46-3EA2-4A19-811C-9DBF4AF4B70E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42B08185-A734-40BB-B24D-8E005EC87C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42B08185-A734-40BB-B24D-8E005EC87C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42B08185-A734-40BB-B24D-8E005EC87C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42B08185-A734-40BB-B24D-8E005EC87C79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68DCC3BF-4375-477D-996F-8EF55ACEDDC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68DCC3BF-4375-477D-996F-8EF55ACEDDC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68DCC3BF-4375-477D-996F-8EF55ACEDDC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68DCC3BF-4375-477D-996F-8EF55ACEDDC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6872B5B3-CFF2-4FC5-9596-DB10C4E9FB96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6872B5B3-CFF2-4FC5-9596-DB10C4E9FB96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6872B5B3-CFF2-4FC5-9596-DB10C4E9FB96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6872B5B3-CFF2-4FC5-9596-DB10C4E9FB96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
