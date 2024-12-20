@@ -1,10 +1,12 @@
 ﻿@inherits Modulebase
 @namespace Mihcelle.Hwavmvid.Modules.Databasesettings
 
+@using Mihcelle.Hwavmvid.Shared.Models
+@using Microsoft.EntityFrameworkCore
+
 @inject IHttpClientFactory ihttpclientfactory
 @inject Applicationprovider applicationprovider
 
-@using Mihcelle.Hwavmvid.Shared.Models
 
 <AuthorizeView>
     <Authorized>
@@ -30,9 +32,6 @@
         </div>
 
     </Authorized>
-    <NotAuthorized>
-
-    </NotAuthorized>
 </AuthorizeView>
 
 
@@ -41,15 +40,15 @@
 
     [Parameter] public Moduleservice<Modulepreferences> Moduleparams { get; set; }
 
-    public Applicationtenant tenant { get; set; }
+    public Applicationtenant? tenant { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
 
         try
         {
-            var client = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-            this.tenant = await client.GetFromJsonAsync<Applicationtenant>(string.Concat("api/tenant/", this.applicationprovider._contextsite.Id));
+            var site = await this.applicationdbcontextmihcellehwavmvid.Applicationsites.FirstOrDefaultAsync();
+            this.tenant = await this.applicationdbcontextmihcellehwavmvid.Applicationtenants.Where(item => item.Siteid == site.Id).FirstOrDefaultAsync();
         }
         catch (Exception exception)
         {

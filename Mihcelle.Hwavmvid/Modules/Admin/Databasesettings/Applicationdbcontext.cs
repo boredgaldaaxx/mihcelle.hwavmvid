@@ -31,8 +31,8 @@ namespace Mihcelle.Hwavmvid.Framework.Modules.Databasesettings
                     Name = "Databasesettings",
                     Version = "1.0.0",
                     Icon = "W",
-                    Assemblytype = "Mihcelle.Hwavmvid.Modules.Databasesettings.Databasesettings, Mihcelle.Hwavmvid.Client",
-                    Settingstype = "Mihcelle.Hwavmvid.Modules.Databasesettings.Settings, Mihcelle.Hwavmvid.Client",
+                    Assemblytype = "Mihcelle.Hwavmvid.Modules.Databasesettings.Databasesettings, Mihcelle.Hwavmvid",
+                    Settingstype = "Mihcelle.Hwavmvid.Modules.Databasesettings.Settings, Mihcelle.Hwavmvid",
                     Description = Applicationmoduletype.Applicationmoduleframework,
                     Createdon = DateTime.Now,
                 };

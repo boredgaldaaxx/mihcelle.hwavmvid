@@ -30,9 +30,7 @@ Welcome to your new app. Installation link here.
         if (firstRender)
         {
 
-            await this.modalservice.Initmodal();
             await this.cookiesprovider.Initcookiesprovider();
-
             var client = this.ihttpclientfactory.CreateClient();
             client.BaseAddress = new Uri(this.navigationmanager.BaseUri);
             var httpresponsemessage = await client.GetAsync("api/authcookie");

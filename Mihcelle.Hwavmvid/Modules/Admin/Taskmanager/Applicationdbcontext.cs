@@ -31,8 +31,8 @@ namespace Mihcelle.Hwavmvid.Framework.Modules.Taskmanager
                     Name = "Taskmanager",
                     Version = "1.0.0",
                     Icon = "№",
-                    Assemblytype = "Mihcelle.Hwavmvid.Modules.Taskmanager.Taskmanager, Mihcelle.Hwavmvid.Client",
-                    Settingstype = "Mihcelle.Hwavmvid.Modules.Taskmanager.Settings, Mihcelle.Hwavmvid.Client",
+                    Assemblytype = "Mihcelle.Hwavmvid.Modules.Taskmanager.Taskmanager, Mihcelle.Hwavmvid",
+                    Settingstype = "Mihcelle.Hwavmvid.Modules.Taskmanager.Settings, Mihcelle.Hwavmvid",
                     Description = Applicationmoduletype.Applicationmoduleframework,
                     Createdon = DateTime.Now,
                 };

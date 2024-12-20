@@ -31,8 +31,8 @@ namespace Mihcelle.Hwavmvid.Framework.Modules.Sitesettings
                     Name = "Sitesettings",
                     Version = "1.0.0",
                     Icon = "S",
-                    Assemblytype = "Mihcelle.Hwavmvid.Modules.Sitesettings.Sitesettings, Mihcelle.Hwavmvid.Client",
-                    Settingstype = "Mihcelle.Hwavmvid.Modules.Sitesettings.Settings, Mihcelle.Hwavmvid.Client",
+                    Assemblytype = "Mihcelle.Hwavmvid.Modules.Sitesettings.Sitesettings, Mihcelle.Hwavmvid",
+                    Settingstype = "Mihcelle.Hwavmvid.Modules.Sitesettings.Settings, Mihcelle.Hwavmvid",
                     Description = Applicationmoduletype.Applicationmoduleframework,
                     Createdon = DateTime.Now,
                 };

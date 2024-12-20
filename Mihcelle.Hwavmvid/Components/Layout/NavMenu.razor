@@ -2,6 +2,7 @@
 
 @inject NavigationManager NavigationManager
 @inject Applicationdbcontext applicationdbcontext
+@inject IConfiguration configuration
 
 @using System
 @using System.Data.Common
@@ -154,11 +155,16 @@
     protected override async Task OnInitializedAsync()
     {
 
-        var contextsite =  await this.applicationdbcontext.Applicationsites.FirstOrDefaultAsync();
-        if (contextsite != null)
+        bool installed = !string.IsNullOrEmpty(this.configuration.GetConnectionString("DefaultConnection"));
+        if (installed)
         {
-            this.contextpages = await this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == contextsite.Id).ToListAsync();
+            var contextsite = await this.applicationdbcontext.Applicationsites.FirstOrDefaultAsync();
+            if (contextsite != null)
+            {
+                this.contextpages = await this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == contextsite.Id).ToListAsync();
+            }
         }
+
         currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
         NavigationManager.LocationChanged += OnLocationChanged;
 

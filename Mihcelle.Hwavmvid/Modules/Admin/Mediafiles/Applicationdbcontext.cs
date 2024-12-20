@@ -31,8 +31,8 @@ namespace Mihcelle.Hwavmvid.Framework.Modules.Mediafiles
                     Name = "Mediafiles",
                     Version = "1.0.0",
                     Icon = "A",
-                    Assemblytype = "Mihcelle.Hwavmvid.Modules.Mediafiles.Mediafiles, Mihcelle.Hwavmvid.Client",
-                    Settingstype = "Mihcelle.Hwavmvid.Modules.Mediafiles.Settings, Mihcelle.Hwavmvid.Client",
+                    Assemblytype = "Mihcelle.Hwavmvid.Modules.Mediafiles.Mediafiles, Mihcelle.Hwavmvid",
+                    Settingstype = "Mihcelle.Hwavmvid.Modules.Mediafiles.Settings, Mihcelle.Hwavmvid",
                     Description = Applicationmoduletype.Applicationmoduleframework,
                     Createdon = DateTime.Now,
                 };

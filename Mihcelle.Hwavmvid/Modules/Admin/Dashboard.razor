@@ -1,13 +1,27 @@
-﻿@inherits ComponentBase
+﻿@rendermode InteractiveServer
 
-@using Mihcelle.Hwavmvid.Shared.Models
-@using Mihcelle.Hwavmvid.Data
+@inject Modalservice modalservice
+@inject NavigationManager NavigationManager
+@inject Applicationdbcontext applicationdbcontext
+
 @using Mihcelle.Hwavmvid.Modal
-@using Microsoft.AspNetCore.Components
-@using Microsoft.AspNetCore.Components.Web
-@using Mihcelle.Hwavmvid.Modules
+@using Mihcelle.Hwavmvid.Data
 @using Mihcelle.Hwavmvid.Shared.Constants
 @using Microsoft.EntityFrameworkCore
+@using System.Linq
+@using System.Collections.Generic
+
+@using System.Net.Http
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.JSInterop
+@using Mihcelle.Hwavmvid
+@using Mihcelle.Hwavmvid.Components
 
 @inject Applicationdbcontext applicationdbcontext
 @inject Modalservice modalservice
@@ -63,7 +77,8 @@
     {
 
         var items = await this.applicationdbcontext.Applicationmodulepackages.Where(item => item.Description.StartsWith(Applicationmoduletype.Applicationmoduleframework)).ToListAsync();
-        this.contextcomponenttype = Type.GetType(items.FirstOrDefault().Assemblytype);
+        var item = items.FirstOrDefault();
+        this.contextcomponenttype = Type.GetType(item.Assemblytype);
         this.applicationprovider._contextframeworkpackages = items;
 
         await base.OnInitializedAsync();

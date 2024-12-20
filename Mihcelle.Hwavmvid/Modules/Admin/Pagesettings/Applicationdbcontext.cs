@@ -31,8 +31,8 @@ namespace Mihcelle.Hwavmvid.Framework.Modules.Pagesettings
                     Name = "Pagesettings",
                     Version = "1.0.0",
                     Icon = "S",
-                    Assemblytype = "Mihcelle.Hwavmvid.Modules.Pagesettings.Pagesettings, Mihcelle.Hwavmvid.Client",
-                    Settingstype = "Mihcelle.Hwavmvid.Modules.Pagesettings.Settings, Mihcelle.Hwavmvid.Client",
+                    Assemblytype = "Mihcelle.Hwavmvid.Modules.Pagesettings.Pagesettings, Mihcelle.Hwavmvid",
+                    Settingstype = "Mihcelle.Hwavmvid.Modules.Pagesettings.Settings, Mihcelle.Hwavmvid",
                     Description = Applicationmoduletype.Applicationmoduleframework,
                     Createdon = DateTime.Now,
                 };
