@@ -35,7 +35,7 @@ namespace Mihcelle.Hwavmvid
             await base.OnConnectedAsync();
         }
 
-        [Authorize]
+        [AllowAnonymous]
         public async Task Establishapplicationconnection()
         {
 
