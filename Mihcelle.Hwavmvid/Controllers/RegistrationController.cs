@@ -13,11 +13,11 @@ namespace Mihcelle.Hwavmvid.Controllers
     [Route("api/[controller]")]
     public class Registrationcontroller : ControllerBase
     {
-        public UserManager<ApplicationUser> usermanager { get; set; }
-        public SignInManager<ApplicationUser> signinmanager { get; set; }
+        public UserManager<Applicationuser> usermanager { get; set; }
+        public SignInManager<Applicationuser> signinmanager { get; set; }
         public RoleManager<IdentityRole> rolemanager { get; set; }
 
-        public Registrationcontroller(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signinmanager, RoleManager<IdentityRole> rolemanager)
+        public Registrationcontroller(UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager)
         {
             this.usermanager = usermanager;
             this.signinmanager = signinmanager;
@@ -34,7 +34,7 @@ namespace Mihcelle.Hwavmvid.Controllers
                 throw new HubException("no valid data provided");
             }
 
-            var applicationuser = new ApplicationUser();
+            var applicationuser = new Applicationuser();
             applicationuser.UserName = username;
             applicationuser.Email = email;
             applicationuser.PasswordHash = password;

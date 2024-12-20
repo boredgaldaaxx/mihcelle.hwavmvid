@@ -18,11 +18,11 @@ namespace Mihcelle.Hwavmvid.Controllers
     public class Applicationauthenticationstatecontroller : ControllerBase
     {
 
-        public UserManager<ApplicationUser> usermanager { get; set; }
-        public SignInManager<ApplicationUser> signinmanager { get; set; }
+        public UserManager<Applicationuser> usermanager { get; set; }
+        public SignInManager<Applicationuser> signinmanager { get; set; }
         public RoleManager<IdentityRole> rolemanager { get; set; }
 
-        public Applicationauthenticationstatecontroller(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signinmanager, RoleManager<IdentityRole> rolemanager)
+        public Applicationauthenticationstatecontroller(UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager)
         {
             this.usermanager = usermanager;
             this.signinmanager = signinmanager;

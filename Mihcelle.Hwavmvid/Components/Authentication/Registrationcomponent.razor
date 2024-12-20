@@ -1,6 +1,6 @@
 ﻿@rendermode InteractiveServer
 
-@using Mihcelle.Hwavmvid.Data
+@using Mihcelle.Hwavmvid.Shared.Models
 
 @inject NavigationManager navigationmanager
 @inject IHttpClientFactory ihttpclientfactory
@@ -31,7 +31,7 @@
 @code {
 
 
-    public ApplicationUser Applicationuser { get; set; } = new ApplicationUser();
+    public Applicationuser Applicationuser { get; set; } = new Applicationuser();
 
     protected async Task Registeruser()
     {

@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Mihcelle.Hwavmvid.Data
+namespace Mihcelle.Hwavmvid.Shared.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class Applicationuser : IdentityUser
     {
 
         [Key] [DatabaseGenerated(DatabaseGeneratedOption.Identity)] [StringLength(410)]

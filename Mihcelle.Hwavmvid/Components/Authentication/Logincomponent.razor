@@ -3,10 +3,12 @@
 @using Mihcelle.Hwavmvid.Data
 @using Mihcelle.Hwavmvid.Shared.Models
 @using Microsoft.AspNetCore.Identity
+@using Mihcelle.Hwavmvid.Cookies
 
 @inject NavigationManager navigationmanager
 @inject IHttpClientFactory ihttpclientfactory
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject Cookiesprovider cookiesprovider
 
 <div class="login">
 
@@ -27,7 +29,7 @@
 
 @code {
 
-    protected ApplicationUser Applicationuser { get; set; } = new ApplicationUser();
+    protected Applicationuser Applicationuser { get; set; } = new Applicationuser();
     protected AuthenticationState authenticationState { get; set; }
 
     protected override async Task OnInitializedAsync()
@@ -45,6 +47,7 @@
             var client = this.ihttpclientfactory.CreateClient();
             client.BaseAddress = new Uri(this.navigationmanager.BaseUri);
             await client.GetAsync("api/login/" + this.Applicationuser.UserName + "/" + this.Applicationuser.PasswordHash);
+
             this.navigationmanager.NavigateTo(navigationmanager.Uri, true);
         }
         catch (Exception exception)

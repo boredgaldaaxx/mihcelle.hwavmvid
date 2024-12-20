@@ -14,41 +14,36 @@ namespace Mihcelle.Hwavmvid.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class Logincontroller : ControllerBase
+    public class Authcookiecontroller : ControllerBase
     {
 
         public UserManager<Applicationuser> usermanager { get; set; }
         public SignInManager<Applicationuser> signinmanager { get; set; }
 
-        public Logincontroller(UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager)
+        public Authcookiecontroller(UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager)
         {
             this.usermanager = usermanager;
             this.signinmanager = signinmanager;
         }
 
         [AllowAnonymous]
-        [HttpGet("{username}/{password}")]
-        public async Task Get(string username, string password)
+        [HttpGet]
+        public async Task<string?> Get()
         {
 
             try
             {
-                if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
+                string authcookie = this.HttpContext.Request.Cookies[Shared.Constants.Authentication.Authcookiename];
+                if (!string.IsNullOrEmpty(authcookie))
                 {
-                    var identityuser = await usermanager.FindByNameAsync(username);
-                    if (identityuser != null)
-                    {
-                        var result = await signinmanager.PasswordSignInAsync(identityuser, password, true, false);
-                        if (!result.Succeeded)
-                        {
-                            throw new HubException("user sign in failed..");
-                        }
-                    }
+                    return authcookie;
                 }
             } catch (Exception exceptiion)
             {
-
+                Console.Write(exceptiion.Message);
             }
+
+            return null;
         }
     }
 }

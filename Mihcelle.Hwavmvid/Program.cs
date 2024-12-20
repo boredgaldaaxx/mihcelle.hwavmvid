@@ -8,6 +8,8 @@ using Mihcelle.Hwavmvid.Shared.Constants;
 using Mihcelle.Hwavmvid.Shared.Models;
 using Mihcelle.Hwavmvid;
 using Mihcelle.Hwavmvid.Cookies;
+using Microsoft.AspNetCore.Http.Connections;
+using Mihcelle.Hwavmvid.Alerts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +25,7 @@ try
     // mihcelle.hwavmvid
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
     builder.Services.AddDbContext<Applicationdbcontext>(options => options.UseSqlServer(connectionString));
-    builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+    builder.Services.AddIdentity<Applicationuser, IdentityRole>(options =>
     {
         options.SignIn.RequireConfirmedAccount = false;
         options.Password.RequireNonAlphanumeric = false;
@@ -80,7 +82,31 @@ builder.Services.AddCors(option =>
 
 // mihcelle.hwavmvid
 builder.Services.AddScoped<AuthenticationStateProvider, Applicationauthenticationstateprovider>();
+builder.Services.AddScoped<Applicationprovider, Applicationprovider>();
+builder.Services.AddScoped<AlertsService, AlertsService>();
 builder.Services.AddScoped<Cookiesprovider, Cookiesprovider>();
+
+// mihcelle.hwavmvid
+builder.Services.AddSignalR()
+    .AddHubOptions<Applicationhub>(options =>
+    {
+        options.EnableDetailedErrors = true;
+        options.KeepAliveInterval = TimeSpan.FromSeconds(15);
+        options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
+        options.MaximumReceiveMessageSize = Int64.MaxValue;
+        options.StreamBufferCapacity = Int32.MaxValue;
+    })
+    .AddJsonProtocol(options =>
+    {
+        options.PayloadSerializerOptions.WriteIndented = false;
+        options.PayloadSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never;
+        options.PayloadSerializerOptions.AllowTrailingCommas = true;
+        options.PayloadSerializerOptions.NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals;
+        options.PayloadSerializerOptions.DefaultBufferSize = 4096;
+        options.PayloadSerializerOptions.MaxDepth = 41;
+        options.PayloadSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+        options.PayloadSerializerOptions.PropertyNamingPolicy = null;
+    });
 
 var app = builder.Build();
 
@@ -102,8 +128,19 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors("mihcellehwavmvidcorspolicy");
 
+// mihcelle.hwamvid
 app.UseAuthentication();
 app.UseAuthorization();
+
+// mihcelle.hwavmvid
+app.MapHub<Applicationhub>("/api/applicationhub", options =>
+{
+    options.Transports = HttpTransportType.WebSockets | HttpTransportType.LongPolling;
+    options.ApplicationMaxBufferSize = long.MaxValue;
+    options.TransportMaxBufferSize = long.MaxValue;
+    options.WebSockets.CloseTimeout = TimeSpan.FromSeconds(10);
+    options.LongPolling.PollTimeout = TimeSpan.FromSeconds(10);
+});
 
 app.UseAntiforgery();
 

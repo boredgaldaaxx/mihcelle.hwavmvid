@@ -6,10 +6,10 @@ using Mihcelle.Hwavmvid.Shared.Models;
 
 namespace Mihcelle.Hwavmvid.Data
 {
-    public class Applicationdbcontext : IdentityDbContext<ApplicationUser>
+    public class Applicationdbcontext : IdentityDbContext<Applicationuser>
     {
 
-        public DbSet<ApplicationUser> Applicationusers { get; set; }
+        public DbSet<Applicationuser> Applicationusers { get; set; }
         public DbSet<Applicationsite> Applicationsites { get; set; }
         public DbSet<Applicationtenant> Applicationtenants { get; set; }
         public DbSet<Applicationpage> Applicationpages { get; set; }

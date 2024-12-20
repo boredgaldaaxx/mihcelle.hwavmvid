@@ -25,14 +25,14 @@ namespace Mihcelle.Hwavmvid.Controllers
         public IHostApplicationLifetime ihostapplicationlifetime { get; set; }
         public IWebHostEnvironment iwebhostenvironment { get; set; }
         public IConfiguration configuration { get; set; }
-        public UserManager<ApplicationUser> usermanager { get; set; }
-        public SignInManager<ApplicationUser> signinmanager { get; set; }
+        public UserManager<Applicationuser> usermanager { get; set; }
+        public SignInManager<Applicationuser> signinmanager { get; set; }
         public RoleManager<IdentityRole> rolemanager { get; set; }
         public Applicationdbcontext context { get; set; }
 
         private const string frontpagename = "Mihcellehwavmvid corporatcc";
 
-        public Installationcontroller(IHostApplicationLifetime ihostapplicationlifetime, IWebHostEnvironment environment, IConfiguration configuration, UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signinmanager, RoleManager<IdentityRole> rolemanager, Applicationdbcontext context)
+        public Installationcontroller(IHostApplicationLifetime ihostapplicationlifetime, IWebHostEnvironment environment, IConfiguration configuration, UserManager<Applicationuser> usermanager, SignInManager<Applicationuser> signinmanager, RoleManager<IdentityRole> rolemanager, Applicationdbcontext context)
         {
 
             this.ihostapplicationlifetime = ihostapplicationlifetime;
@@ -75,7 +75,7 @@ namespace Mihcelle.Hwavmvid.Controllers
             //this.htmleditorapplicationdbcontext.Database.SetConnectionString(connectionstring);
             //await this.htmleditorapplicationdbcontext.Database.MigrateAsync();
 
-            var applicationuser = new ApplicationUser();
+            var applicationuser = new Applicationuser();
             applicationuser.UserName = model.Hostusername;
             applicationuser.Email = model.Hostusername + "@mihcelle.hwavmvid.com";
             applicationuser.PasswordHash = model.Hostpassword;
