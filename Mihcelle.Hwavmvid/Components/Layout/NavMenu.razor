@@ -14,134 +14,138 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-    <a class="navbar-brand" href="#">Mihcelle.Hwavmvid</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="container-fluid">
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link disabled lead" href="#" style="font-size: 1.4rem;">.net framework</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
+        <a class="navbar-brand" href="#">Mihcelle.Hwavmvid</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <li class="nav-item dropdown">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link disabled lead" href="#" style="font-size: 1.4rem;">.net framework</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
 
-                <a class="nav-link dropdown-toggle" href="#" id="navbardropdownblank" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Links
-                </a>
+                <li class="nav-item dropdown">
 
-                @if (this.contextpages != null && this.contextpages.Any())
-                {
-                    <ul class="dropdown-menu" aria-labelledby="navbardropdownblank" style="left: auto !important; right: 0;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardropdownblank" role="button" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                        Links
+                    </a>
 
-                        @foreach (var item in this.contextpages)
-                        {
-                            <li class="dropdown-item">
-                                <a href="@(this.NavigationManager.BaseUri + item.Urlpath)" target="_self">
-                                    @item.Name
-                                </a>
-                            </li>
-                        }
+                    @if (this.contextpages != null && this.contextpages.Any())
+                    {
+                        <ul class="dropdown-menu" aria-labelledby="navbardropdownblank" style="left: auto !important; right: 0;">
+
+                            @foreach (var item in this.contextpages)
+                            {
+                                <li class="dropdown-item">
+                                    <a href="@(this.NavigationManager.BaseUri + item.Urlpath)" target="_self">
+                                        @item.Name
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </li>
+
+                <AuthorizeView>
+                    <Authorized>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardropdownmodulepackages" role="button" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                                Packages
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbardropdownmodulepackages" style="left: auto !important; right: 0;">
+                                <li>
+                                    <div class="p-2 p-sm-4" style="min-width: 410px;">
+
+                                        module package dropdown
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </Authorized>
+                </AuthorizeView>
+
+                <AuthorizeView>
+                    <Authorized>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardropdownadmindashboard" role="button" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbardropdownadmindashboard" style="left: auto !important; right: 0;">
+                                <li>
+                                    <div class="p-2 p-sm-4" style="min-width: 850px;">
+
+                                        <Mihcelle.Hwavmvid.Modules.Admin.Dashboard />
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </Authorized>
+                </AuthorizeView>
+
+                <li class="nav-item dropdown">
+
+
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardropdownaccount" role="button" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+
+                        <AuthorizeView>
+                            <Authorized>
+                                <span>☑ @context?.User?.Identity?.Name</span>
+                            </Authorized>
+                        </AuthorizeView>                        
+
+                        <AuthorizeView>
+                            <NotAuthorized>
+
+                                <span>Account / Login</span>
+
+                            </NotAuthorized>
+                        </AuthorizeView>
+
+
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbardropdownaccount" style="left: auto !important; right: 0;">
+                        <li>
+                            <div class="p-2 p-sm-4" style="min-width: 410px;">
+
+                                <AuthorizeView>
+                                    <NotAuthorized>
+
+                                        <div class="mb-4">
+                                            <Mihcelle.Hwavmvid.Components.Authentication.Registrationcomponent />
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <Mihcelle.Hwavmvid.Components.Authentication.Logincomponent />
+                                        </div>
+
+                                    </NotAuthorized>
+                                </AuthorizeView>
+
+                                <AuthorizeView>
+                                    <Authorized>
+                                        <form action="Account/Logout" method="post">
+
+                                            <Mihcelle.Hwavmvid.Components.Authentication.Logoutcomponent />
+
+                                        </form>
+                                    </Authorized>
+                                </AuthorizeView>
+
+                            </div>
+                        </li>
                     </ul>
-                }
-            </li>
+                </li>
 
-            <AuthorizeView>
-                <Authorized>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardropdownmodulepackages" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Packages
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbardropdownmodulepackages" style="left: auto !important; right: 0;">
-                            <li>
-                                <div class="p-2 p-sm-4" style="min-width: 410px;">
+            </ul>
+        </div>
 
-                                    module package dropdown
-
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </Authorized>
-            </AuthorizeView>
-
-            <AuthorizeView>
-                <Authorized>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardropdownadmindashboard" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Admin
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbardropdownadmindashboard" style="left: auto !important; right: 0;">
-                            <li>
-                                <div class="p-2 p-sm-4" style="min-width: 850px;">
-
-                                    <Mihcelle.Hwavmvid.Modules.Admin.Dashboard />
-
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </Authorized>
-            </AuthorizeView>
-
-            <li class="nav-item dropdown">
-
-
-                <a class="nav-link dropdown-toggle" href="#" id="navbardropdownaccount" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                    <AuthorizeView>
-                        <Authorized>
-                            <span>☑ @context.User.Identity.Name</span>
-                        </Authorized>
-                    </AuthorizeView>                        
-
-                    <AuthorizeView>
-                        <NotAuthorized>
-
-                            <span>Account / Login</span>
-
-                        </NotAuthorized>
-                    </AuthorizeView>
-
-
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbardropdownaccount" style="left: auto !important; right: 0;">
-                    <li>
-                        <div class="p-2 p-sm-4" style="min-width: 410px;">
-
-                            <AuthorizeView>
-                                <NotAuthorized>
-
-                                    <div class="mb-4">
-                                        <Mihcelle.Hwavmvid.Components.Authentication.Registrationcomponent />
-                                    </div>
-
-                                    <div class="mb-4">
-                                        <Mihcelle.Hwavmvid.Components.Authentication.Logincomponent />
-                                    </div>
-
-                                </NotAuthorized>
-                            </AuthorizeView>
-
-                            <AuthorizeView>
-                                <Authorized>
-                                    <form action="Account/Logout" method="post">
-
-                                        <Mihcelle.Hwavmvid.Components.Authentication.Logoutcomponent />
-
-                                    </form>
-                                </Authorized>
-                            </AuthorizeView>
-
-                        </div>
-                    </li>
-                </ul>
-            </li>
-
-        </ul>
     </div>
 
 </nav>
