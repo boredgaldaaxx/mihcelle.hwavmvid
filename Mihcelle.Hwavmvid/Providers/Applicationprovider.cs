@@ -36,7 +36,7 @@ namespace Mihcelle.Hwavmvid
 
         // application _context properties //
         public AuthenticationState? _contextauth { get; set; }
-        public Applicationsite _contextsite { get; set; }
+        public Applicationsite? _contextsite { get; set; }
         public Applicationpage? _contextpage { get; set; }
         public Applicationcontainer? _contextcontainer { get; set; }
 

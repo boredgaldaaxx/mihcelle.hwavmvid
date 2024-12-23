@@ -34,7 +34,7 @@ try
     connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
     installed = !string.IsNullOrEmpty(connectionString);
 
-    builder.Services.AddDbContext<Applicationdbcontext>(options => options.UseSqlServer(connectionString));
+    builder.Services.AddDbContextFactory<Applicationdbcontext>(options => options.UseSqlServer(connectionString));
     builder.Services.AddIdentity<Applicationuser, IdentityRole>(options =>
     {
         options.SignIn.RequireConfirmedAccount = false;

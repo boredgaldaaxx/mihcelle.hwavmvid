@@ -1,29 +1,61 @@
 ﻿@page "/{_contextpageurlpath?}"
 @rendermode InteractiveServer
 
+@using Microsoft.EntityFrameworkCore
+@using System.Linq
+@using System.Collections.Generic
+
 @inject Applicationprovider applicationprovider
 @inject IHttpClientFactory ihttpclientfactory
 @inject NavigationManager navigationmanager
 @inject Cookies.Cookiesprovider cookiesprovider
 @inject Modal.Modalservice modalservice
+@inject Data.Applicationdbcontext applicationdbcontext
 
-<PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="sidebar">
 
-Welcome to your new app. Installation link here.
+    <Mihcelle.Hwavmvid.Components.Layout.NavMenu />
 
-<div>
-    <NavLink class="dropdown-item" href="Installation">
-        <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Install and ensure database created.
-    </NavLink>
 </div>
+
+<div class="content px-4">
+
+    <PageTitle>Home</PageTitle>
+
+    <h1>Hello, world!</h1>
+
+    Welcome to your new app. Installation link here.
+
+    <div>
+        <NavLink class="dropdown-item" href="Installation">
+            <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Install and ensure database created.
+        </NavLink>
+    </div>
+
+</div>
+
 
 @code{
 
     [Parameter]
     public string? _contextpageurlpath { get; set; }
 
+    protected override void OnInitialized()
+    {
+        this.applicationprovider._contextsite = this.applicationdbcontext.Applicationsites.FirstOrDefault();
+        base.OnInitialized();
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (this.applicationprovider._contextpage == null)
+        {
+            this.applicationprovider._contextpage = this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == this.applicationprovider._contextsite.Id && (item.Urlpath == this._contextpageurlpath || item.Urlpath == "index")).FirstOrDefault();
+        }
+
+        base.OnParametersSet();
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

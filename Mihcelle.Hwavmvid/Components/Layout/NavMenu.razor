@@ -1,5 +1,7 @@
-﻿@implements IDisposable
+﻿@rendermode InteractiveServer
+@implements IDisposable
 
+@inject Applicationprovider applicationprovider
 @inject NavigationManager NavigationManager
 @inject Applicationdbcontext applicationdbcontext
 @inject IConfiguration configuration
@@ -162,11 +164,8 @@
         bool installed = !string.IsNullOrEmpty(this.configuration.GetConnectionString("DefaultConnection"));
         if (installed)
         {
-            var contextsite = await this.applicationdbcontext.Applicationsites.FirstOrDefaultAsync();
-            if (contextsite != null)
-            {
-                this.contextpages = await this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == contextsite.Id).ToListAsync();
-            }
+            var contextsiteid = this.applicationprovider?._contextsite?.Id;
+            this.contextpages = await this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == contextsiteid).ToListAsync();
         }
 
         currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);

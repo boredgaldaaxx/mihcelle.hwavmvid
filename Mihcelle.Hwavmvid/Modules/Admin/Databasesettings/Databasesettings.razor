@@ -48,8 +48,7 @@
 
         try
         {
-            var site = await this.applicationdbcontextmihcellehwavmvid.Applicationsites.FirstOrDefaultAsync();
-            this.tenant = await this.applicationdbcontextmihcellehwavmvid.Applicationtenants.Where(item => item.Siteid == site.Id).FirstOrDefaultAsync();
+            this.tenant = await this.applicationdbcontextmihcellehwavmvid.Applicationtenants.Where(item => item.Siteid == this.applicationprovider._contextsite.Id).FirstOrDefaultAsync();
         }
         catch (Exception exception)
         {

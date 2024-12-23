@@ -64,7 +64,7 @@ namespace Mihcelle.Hwavmvid.Controllers
                 await this.signinmanager.SignOutAsync();
             }
 
-            var connectionstring = $"Data Source={model.Sqlserverinstance};Initial Catalog={model.Databasename};User ID={model.Databaseowner};Password={model.Databaseownerpassword};Encrypt=true;TrustServerCertificate=true;";
+            var connectionstring = $"Data Source={model.Sqlserverinstance};Initial Catalog={model.Databasename};User ID={model.Databaseowner};Password={model.Databaseownerpassword};Encrypt=true;TrustServerCertificate=true;MultipleActiveResultSets=true;";
             
             this.Updatedconnectionstring(connectionstring);
             this.ihostapplicationlifetime.StopApplication();
@@ -135,7 +135,7 @@ namespace Mihcelle.Hwavmvid.Controllers
             await this.context.SaveChangesAsync();
 
             
-            string[] pagenames = new[] { frontpagename, "Tavwa gal", "Environmant 99.11", "Holyshit", "Thyccann", "National Airports", "Whenevar", "Nowherea" };
+            string[] pagenames = new[] { frontpagename, "Index", "Tavwa gal", "Environmant 99.11", "Holyshit", "Thyccann", "National Airports", "Whenevar", "Nowherea" };
             foreach(var pagename in pagenames)
             {
                 var page = new Applicationpage()
