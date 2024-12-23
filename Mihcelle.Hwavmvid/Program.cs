@@ -31,7 +31,7 @@ try
 {
 
     // mihcelle.hwavmvid
-    connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     installed = !string.IsNullOrEmpty(connectionString);
 
     builder.Services.AddDbContextFactory<Applicationdbcontext>(options => options.UseSqlServer(connectionString));
@@ -89,6 +89,7 @@ builder.Services.AddCors(option =>
                .AllowCredentials();
     });
 });
+
 
 // mihcelle.hwavmvid
 builder.Services.AddScoped<AuthenticationStateProvider, Applicationauthenticationstateprovider>();
@@ -190,19 +191,22 @@ app.MapRazorComponents<App>()
 app.MapControllers();
 
 // mihcelle.hwavmvid
-try
+if (installed == true)
 {
-    var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterface)).IsAssignableFrom(assemblytypes));
-    programitems = programitems.Where(item => item.IsClass);
-    programitems = programitems.OrderBy(item => !string.IsNullOrEmpty(item.FullName) && item.FullName.StartsWith("Mihcelle.Hwavmvid.Programstartup")).ToList();
-
-    foreach (var item in programitems)
+    try
     {
-        Programinterface? programinterfaceinstance = (Programinterface?)Activator.CreateInstance(item);
-        if (programinterfaceinstance != null)
-            programinterfaceinstance.Configureapp(app);
+        var programitems = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(assemblytypes => (typeof(Programinterface)).IsAssignableFrom(assemblytypes));
+        programitems = programitems.Where(item => item.IsClass);
+        programitems = programitems.OrderBy(item => !string.IsNullOrEmpty(item.FullName) && item.FullName.StartsWith("Mihcelle.Hwavmvid.Programstartup")).ToList();
+
+        foreach (var item in programitems)
+        {
+            Programinterface? programinterfaceinstance = (Programinterface?)Activator.CreateInstance(item);
+            if (programinterfaceinstance != null)
+                programinterfaceinstance.Configureapp(app);
+        }
     }
+    catch (Exception exception) { Console.WriteLine(exception.Message); }
 }
-catch (Exception exception) { Console.WriteLine(exception.Message); }
 
 app.Run();

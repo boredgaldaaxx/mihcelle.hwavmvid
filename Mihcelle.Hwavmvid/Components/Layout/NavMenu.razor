@@ -161,13 +161,9 @@
     protected override async Task OnInitializedAsync()
     {
 
-        bool installed = !string.IsNullOrEmpty(this.configuration.GetConnectionString("DefaultConnection"));
-        if (installed)
-        {
-            var contextsiteid = this.applicationprovider?._contextsite?.Id;
-            this.contextpages = await this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == contextsiteid).ToListAsync();
-        }
-
+        var contextsiteid = this.applicationprovider?._contextsite?.Id;
+        this.contextpages = await this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == contextsiteid).ToListAsync();
+        
         currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
         NavigationManager.LocationChanged += OnLocationChanged;
 

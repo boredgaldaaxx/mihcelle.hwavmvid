@@ -5,53 +5,86 @@
 @using System.Linq
 @using System.Collections.Generic
 
-@inject Applicationprovider applicationprovider
+@inject Data.Applicationdbcontext? applicationdbcontext
+@inject Applicationprovider? applicationprovider
+@inject Cookies.Cookiesprovider? cookiesprovider
+@inject Modal.Modalservice? modalservice
+
+@inject IConfiguration configuration
 @inject IHttpClientFactory ihttpclientfactory
 @inject NavigationManager navigationmanager
-@inject Cookies.Cookiesprovider cookiesprovider
-@inject Modal.Modalservice modalservice
-@inject Data.Applicationdbcontext applicationdbcontext
 
 
-<div class="sidebar">
 
-    <Mihcelle.Hwavmvid.Components.Layout.NavMenu />
+<div>
 
-</div>
+    @if (this.installed)
+    {
 
-<div class="content px-4">
+        <div class="sidebar">
 
-    <PageTitle>Home</PageTitle>
+            <Mihcelle.Hwavmvid.Components.Layout.NavMenu />
 
-    <h1>Hello, world!</h1>
+        </div>
 
-    Welcome to your new app. Installation link here.
+        <div class="content px-4">
 
-    <div>
-        <NavLink class="dropdown-item" href="Installation">
-            <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Install and ensure database created.
-        </NavLink>
-    </div>
+            <PageTitle>Home</PageTitle>
+
+            <h1>Hello, world!</h1>
+
+            Welcome to your new app. Installation link here.
+
+            <div>
+                <NavLink class="dropdown-item" href="Installation">
+                    <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Install and ensure database created.
+                </NavLink>
+            </div>
+
+        </div>
+
+
+
+        <link href="/_content/Mihcelle.Hwavmvid.Alerts/alerts.min.css" rel="stylesheet" />
+        <Mihcelle.Hwavmvid.Alerts.AlertsComponent />
+        <Mihcelle.Hwavmvid.Notifications.NotificationsComponent />
+    }
 
 </div>
 
 
 @code{
 
+
+    private bool installed { get; set; } = false;
+
     [Parameter]
     public string? _contextpageurlpath { get; set; }
 
     protected override void OnInitialized()
     {
-        this.applicationprovider._contextsite = this.applicationdbcontext.Applicationsites.FirstOrDefault();
+        try
+        {
+            this.installed = !string.IsNullOrEmpty(this.configuration.GetConnectionString("DefaultConnection"));
+        }
+        catch (Exception exception) { }
+
+        if (this.installed == true) {
+
+            this.applicationprovider._contextsite = this.applicationdbcontext.Applicationsites.FirstOrDefault();
+        }
         base.OnInitialized();
     }
 
     protected override void OnParametersSet()
     {
-        if (this.applicationprovider._contextpage == null)
+
+        if (this.installed == true)
         {
-            this.applicationprovider._contextpage = this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == this.applicationprovider._contextsite.Id && (item.Urlpath == this._contextpageurlpath || item.Urlpath == "index")).FirstOrDefault();
+            if (this.applicationprovider._contextpage == null)
+            {
+                this.applicationprovider._contextpage = this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == this.applicationprovider._contextsite.Id && (item.Urlpath == this._contextpageurlpath || item.Urlpath == "index")).FirstOrDefault();
+            }
         }
 
         base.OnParametersSet();
@@ -59,7 +92,13 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (firstRender && this.installed == false)
+        {
+
+            this.navigationmanager.NavigateTo(this.navigationmanager.BaseUri + "installation", true);
+        }
+
+        if (firstRender && this.installed == true)
         {
 
             await this.cookiesprovider.Initcookiesprovider();
