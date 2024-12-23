@@ -12,10 +12,9 @@
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.Authorization
 
-
-@inject Applicationprovider applicationprovider
 @inject Pagerservice<Applicationmediafile> pagerservice
-
+@inject NotificationsService notificationservice
+@inject IJSRuntime jsruntime
 
 <AuthorizeView>
     <Authorized>
@@ -42,10 +41,10 @@
                     var getItemsApiUrl = string.Concat(this.navigationmanager?.BaseUri, "api/mediafile");
                 }
 
-                @if (this.site != null)
+                @if (this.applicationprovider._contextsite != null)
                 {
 
-                    <PagerComponent ApiQueryId="@this.site.Id" HubConnectionId="@string.Empty" ElementId="Mihcellehwavmvidmedialibrary" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@this.mediaitems" Context="contextitem" ItemsPerPage="12" TItemGeneric="@Applicationmediafile" Class="row align-items-center bg-transparent" Scrolling="@false">
+                    <PagerComponent ApiQueryId="@this.applicationprovider._contextsite.Id" HubConnectionId="@string.Empty" ElementId="Mihcellehwavmvidmedialibrary" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@this.mediaitems" Context="contextitem" ItemsPerPage="12" TItemGeneric="@Applicationmediafile" Class="row align-items-center bg-transparent" Scrolling="@false">
                         <PagerItem>
 
                             <div class="col-lg-2" @ondblclick="async () => await this.copytoclipboard(contextitem)">
@@ -71,11 +70,6 @@
 
     [Parameter] public Moduleservice<Modulepreferences> Moduleparams { get; set; }
 
-    [Inject] public IJSRuntime jsruntime { get; set; }
-    [Inject] public NotificationsService notificationservice { get; set; }
-
-    protected Applicationsite? site { get; set; }
-
     public string Mediafiledropzoneelementid { get; set; } = "mediafile_dropzone_element_id";
     public string Mediafileinputfieldid { get; set; } = "mediafile_input_field_id";
 
@@ -83,8 +77,6 @@
 
     protected async Task copytoclipboard(Applicationmediafile item)
     {
-        this.site = await this.applicationdbcontextmihcellehwavmvid.Applicationsites.FirstOrDefaultAsync();
-
         var url = this.navigationmanager.BaseUri + "/medialibrary/" + item.Filename;
         await this.jsruntime.InvokeVoidAsync("jsfunctions.copytoclipboard", url);
 
@@ -104,7 +96,7 @@
 
     public void RetrievedItems(List<Applicationmediafile> obj, string apiQueryId)
     {
-        if (apiQueryId.ToString() == this.site?.Id)
+        if (apiQueryId.ToString() == this.applicationprovider._contextsite?.Id)
         {
             this.mediaitems.AddRange(obj);
             this.StateHasChanged();
@@ -113,7 +105,7 @@
 
     public async void RemoveItem(Pagerevent<Applicationmediafile> obj)
     {
-        if (obj.ApiQueryId.ToString() == this.site?.Id)
+        if (obj.ApiQueryId.ToString() == this.applicationprovider._contextsite?.Id)
         {
             try
             {
@@ -131,7 +123,7 @@
 
     public void Error(Exception exception, string apiQueryId)
     {
-        if (this.site?.Id == apiQueryId.ToString())
+        if (this.applicationprovider._contextsite?.Id == apiQueryId.ToString())
         {
             Console.Write(exception.Message);
         }

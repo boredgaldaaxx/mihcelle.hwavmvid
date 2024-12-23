@@ -1,4 +1,4 @@
-﻿@rendermode InteractiveServer
+﻿@inherits ComponentBase
 
 @using Mihcelle.Hwavmvid.Modal
 @using Mihcelle.Hwavmvid.Data
@@ -13,15 +13,13 @@
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
 @using Microsoft.AspNetCore.Components.Web
-@using static Microsoft.AspNetCore.Components.Web.RenderMode
-@using Microsoft.AspNetCore.Components.Web.Virtualization
 @using Microsoft.JSInterop
 @using Mihcelle.Hwavmvid
 @using Mihcelle.Hwavmvid.Components
 
 @inject Applicationdbcontext applicationdbcontext
 @inject Modalservice modalservice
-@inject IHttpClientFactory? ihttpclientfactory
+@inject IHttpClientFactory ihttpclientfactory
 @inject Applicationprovider applicationprovider
 @inject NavigationManager NavigationManager
 
@@ -72,7 +70,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-
         var items = await this.applicationdbcontext.Applicationmodulepackages.Where(item => item.Description.StartsWith(Applicationmoduletype.Applicationmoduleframework)).ToListAsync();
         var item = items.FirstOrDefault();
         this.contextcomponenttype = Type.GetType(item.Assemblytype);

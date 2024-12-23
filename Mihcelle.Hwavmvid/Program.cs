@@ -34,7 +34,7 @@ try
     connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     installed = !string.IsNullOrEmpty(connectionString);
 
-    builder.Services.AddDbContextFactory<Applicationdbcontext>(options => options.UseSqlServer(connectionString));
+    builder.Services.AddDbContextFactory<Applicationdbcontext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Transient);
     builder.Services.AddIdentity<Applicationuser, IdentityRole>(options =>
     {
         options.SignIn.RequireConfirmedAccount = false;

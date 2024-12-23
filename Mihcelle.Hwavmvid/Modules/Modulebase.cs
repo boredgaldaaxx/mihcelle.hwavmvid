@@ -4,18 +4,6 @@ using Mihcelle.Hwavmvid.Shared.Models;
 using Mihcelle.Hwavmvid.Shared.Constants;
 using Mihcelle.Hwavmvid.Data;
 
-using System.Net.Http;
-using System.Net.Http.Json;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.AspNetCore.Components.Web;
-using static Microsoft.AspNetCore.Components.Web.RenderMode;
-using Microsoft.AspNetCore.Components.Web.Virtualization;
-using Microsoft.JSInterop;
-using Mihcelle.Hwavmvid;
-using Mihcelle.Hwavmvid.Components;
-
 namespace Mihcelle.Hwavmvid.Modules
 {
     public class Modulebase : ComponentBase

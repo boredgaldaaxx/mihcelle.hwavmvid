@@ -6,11 +6,6 @@
 @using Mihcelle.Hwavmvid.Modules
 @using Microsoft.AspNetCore.Components.Authorization
 
-@inject IHttpClientFactory ihttpclientfactory
-@inject NavigationManager navigationmanager
-@inject Applicationprovider applicationprovider
-
-
 <AuthorizeView>
     <Authorized>
 
@@ -78,9 +73,6 @@
 
     [Parameter] public Moduleservice<Modulepreferences> Moduleparams { get; set; }
 
-    // Site model
-    public Applicationsite? site { get; set; }
-
     // Brandmark
     public string Brandmarkdropzoneelementid { get; set; } = "brandmark_dropzone_element_id";
     public string Brandmarkinputfieldid { get; set; } = "brandmark_input_field_id";
@@ -88,14 +80,5 @@
     // Favicon
     public string Favicondropzoneelementid { get; set; } = "favicon_dropzone_element_id";
     public string Faviconinputfieldid { get; set; } = "favicon_input_field_id";
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-
-        var client = this.ihttpclientfactory.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
-        this.site = await client.GetFromJsonAsync<Applicationsite>("api/site");
-
-        await base.OnAfterRenderAsync(firstRender);
-    }
 
 }
