@@ -61,33 +61,30 @@
     [Parameter]
     public string? _contextpageurlpath { get; set; }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        try
-        {
-            this.installed = !string.IsNullOrEmpty(this.configuration.GetConnectionString("DefaultConnection"));
-        }
-        catch (Exception exception) { }
 
+        this.installed = !string.IsNullOrEmpty(this.configuration.GetConnectionString("DefaultConnection"));
         if (this.installed == true) {
 
-            this.applicationprovider._contextsite = this.applicationdbcontext.Applicationsites.FirstOrDefault();
+            this.applicationprovider._contextsite = await this.applicationdbcontext.Applicationsites.FirstOrDefaultAsync();
         }
-        base.OnInitialized();
+        await base.OnInitializedAsync();
     }
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
 
         if (this.installed == true)
         {
             if (this.applicationprovider._contextpage == null)
             {
-                this.applicationprovider._contextpage = this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == this.applicationprovider._contextsite.Id && (item.Urlpath == this._contextpageurlpath || item.Urlpath == "index")).FirstOrDefault();
+                var contextsiteid = this.applicationprovider?._contextsite?.Id;
+                this.applicationprovider._contextpage = await this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == contextsiteid && (item.Urlpath == this._contextpageurlpath || item.Urlpath == "index")).FirstOrDefaultAsync();
             }
         }
 
-        base.OnParametersSet();
+        await base.OnParametersSetAsync();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

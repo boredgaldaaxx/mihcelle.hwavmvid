@@ -24,7 +24,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddCascadingAuthenticationState();
 
-string connectionString = string.Empty;
+string? connectionString = string.Empty;
 bool installed = false;
 
 try
@@ -34,7 +34,7 @@ try
     connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     installed = !string.IsNullOrEmpty(connectionString);
 
-    builder.Services.AddDbContextFactory<Applicationdbcontext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Transient);
+    builder.Services.AddDbContext<Applicationdbcontext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
     builder.Services.AddIdentity<Applicationuser, IdentityRole>(options =>
     {
         options.SignIn.RequireConfirmedAccount = false;
@@ -44,7 +44,7 @@ try
         options.Password.RequireDigit = false;
         options.Password.RequiredLength = 2;
     })
-    .AddEntityFrameworkStores<Mihcelle.Hwavmvid.Data.Applicationdbcontext>();
+    .AddEntityFrameworkStores<Applicationdbcontext>();
 
     builder.Services.ConfigureApplicationCookie(options =>
     {

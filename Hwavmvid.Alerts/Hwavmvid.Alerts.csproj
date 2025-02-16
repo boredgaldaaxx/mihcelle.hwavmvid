@@ -24,7 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="bundleconfig.json" />
+    <None Include="wwwroot\alerts.css" />
+    <None Include="wwwroot\alerts.js" />
   </ItemGroup>
   
 </Project>

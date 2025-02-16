@@ -26,7 +26,7 @@ namespace Mihcelle.Hwavmvid.Modules
         protected Moduleservice<Modulepreferences> moduleservice { get; set; }
         protected Dictionary<string, object> servpara { get; set; }
 
-        protected override Task OnInitializedAsync()
+        protected override async Task OnInitializedAsync()
         {
             
             this.httpclient = this.ihttpclientfactory?.CreateClient("Mihcelle.Hwavmvid.ServerApi.Unauthenticated");
@@ -39,7 +39,7 @@ namespace Mihcelle.Hwavmvid.Modules
             this.servpara = new Dictionary<string, object>();
             servpara.Add("Moduleparams", this.moduleservice);
 
-            return base.OnInitializedAsync();
+            await base.OnInitializedAsync();
         }
 
         public string adminmodalelementid { get; set; } = "admin_modal_element_id_for_settings";
