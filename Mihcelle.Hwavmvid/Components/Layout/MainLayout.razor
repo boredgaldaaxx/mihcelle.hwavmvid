@@ -22,11 +22,19 @@
 
 @code{
 
+
+    private bool installed { get; set; } = false;
+
     protected override async Task OnInitializedAsync()
     {
 
-        var site = await this.applicationdbcontext.Applicationsites.FirstOrDefaultAsync();
-        this.applicationprovider._contextsite = site;
+        this.installed = !string.IsNullOrEmpty(this.configuration.GetConnectionString("DefaultConnection"));
+        if (this.installed == true)
+        {
+            var site = await this.applicationdbcontext.Applicationsites.FirstOrDefaultAsync();
+            this.applicationprovider._contextsite = site;
+        }
+
         await base.OnInitializedAsync();
     }
 }

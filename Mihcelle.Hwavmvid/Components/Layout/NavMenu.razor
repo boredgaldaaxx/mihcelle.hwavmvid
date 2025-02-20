@@ -161,7 +161,7 @@
     protected override async Task OnInitializedAsync()
     {
 
-        var contextsiteid = this.applicationprovider?._contextsite?.Id;
+        var contextsiteid = this.applicationprovider._contextsite.Id;
         this.contextpages = await this.applicationdbcontext.Applicationpages.Where(item => item.Siteid == contextsiteid).ToListAsync();
         
         currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
