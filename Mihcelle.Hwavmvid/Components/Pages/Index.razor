@@ -65,10 +65,6 @@
     {
 
         this.installed = !string.IsNullOrEmpty(this.configuration.GetConnectionString("DefaultConnection"));
-        if (this.installed == true) {
-
-            this.applicationprovider._contextsite = await this.applicationdbcontext.Applicationsites.FirstOrDefaultAsync();
-        }
         await base.OnInitializedAsync();
     }
 
